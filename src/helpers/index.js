@@ -8,6 +8,12 @@ export function moveImageRight() {
   movingImage.style.marginLeft = currentPosition + 20 + "px";
 }
 
+export function moveImageLeft() {
+  const movingImage = document.getElementById("cat-image");
+  const currentPosition = parseInt(movingImage.style.marginLeft) || 0;
+  movingImage.style.marginLeft = currentPosition - 20 + "px";
+}
+
 export function rotateLeft() {
   const movingImage = document.getElementById("cat-image");
   let updatedDegree = -15 * antiClockDegrees;
@@ -25,6 +31,13 @@ export function rotateRight() {
 export function increaseSize() {
     const movingImage = document.getElementById("cat-image");
     let updatedDegree = 0.3 * intialSize + 1;
+    movingImage.style.scale = updatedDegree;
+    intialSize++;
+  }
+
+  export function decreaseSize() {
+    const movingImage = document.getElementById("cat-image");
+    let updatedDegree = 1;
     movingImage.style.scale = updatedDegree;
     intialSize++;
   }

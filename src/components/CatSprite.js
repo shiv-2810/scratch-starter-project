@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Draggable from "react-draggable";
 
 export default function CatSprite() {
+
  
   return (
-    <Draggable>
+    // <Draggable>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="95.17898101806641"
@@ -13,6 +14,7 @@ export default function CatSprite() {
       version="1.1"
       xmlSpace="preserve"
       id="cat-image"
+      className=""
     >
       <g>
         <g id="Page-1" stroke="none" fillRule="evenodd">
@@ -184,6 +186,6 @@ export default function CatSprite() {
         </g>
       </g>
     </svg>
-    </Draggable>
+    // </Draggable>
   );
 }

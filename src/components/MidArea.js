@@ -3,16 +3,38 @@ import * as d3 from "d3";
 import Icon from "./Icon";
 import Draggable from "react-draggable";
 import BoxComp from "./BoxComp";
-import { increaseSize, moveImageRight, rotateLeft, rotateRight, sayHello } from "../helpers";
+import { decreaseSize, increaseSize, moveImageLeft, moveImageRight, rotateLeft, rotateRight, sayHello } from "../helpers";
 export default function MidArea() {
   const [widgets, setWidgets] = useState([]);
+  const [replayActive, setReplayActive] = useState(false)
 
   function handleDrop(e) {
     setWidgets([...widgets, e.dataTransfer.getData("Type")]);
-    console.log("Widgetsss", widgets);
+  }
+
+  async function  replay(){
+    const movingImage = document.getElementById("cat-image");
+    await widgets.forEach((widget,i)=>{
+      if(widget === 'MOVE'){
+        moveImageLeft()
+       }
+      else if(widget === 'CLOCKWISE'){
+        movingImage.style.transform = `rotate(0deg)`;
+      }
+      else if(widget === 'ANTICLOCKWISE'){
+        movingImage.style.transform = `rotate(0deg)`;
+      }
+      else if(widget === 'CHANGESIZE'){
+        decreaseSize()
+      }
+    })
+    setTimeout(()=>{
+      playTheSequence()
+    },1000)
   }
 
   function playTheSequence() {
+    setReplayActive(true)
     widgets.forEach((widget,i)=>{
       if(widget === 'MOVE'){
         setTimeout(()=>{
@@ -41,7 +63,10 @@ export default function MidArea() {
 
   return (
     <>
+    <div className="flex flex-row gap-2">
     <div onClick={playTheSequence} className="px-4 m-4 rounded-lg cursor-pointer bg-green-300 h-7 flex text-sm items-center justify-center">Play</div>
+   {replayActive ? <div onClick={replay} className="px-4 m-4 rounded-lg cursor-pointer bg-green-300 h-7 flex text-sm items-center justify-center">Replay</div> : null }
+    </div>
     <div
       onDragOver={(e) => e.preventDefault()}
       onDrop={(e) => handleDrop(e)}
